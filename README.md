@@ -10,4 +10,4 @@ Enter the "device_id" at the top of the python script.
 Run the script, then use the demo console to send commands to your device.
 
 
-
+![Demo](platform_working.JPG)
