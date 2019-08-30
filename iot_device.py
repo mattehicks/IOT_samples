@@ -7,7 +7,7 @@ import sys
 import os
 import glob
 import itertools, sys
-from Spinner import Spinner
+import threading
 
 #os.system('modprobe w1-gpio')
 #os.system('modprobe w1-therm')
@@ -16,7 +16,7 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 spinner = itertools.cycle(['-', '/', '|', '\\'])
 
-my_device_id = "{your_Device_id}"
+my_device_id = "XXX123"
 
 BASE_URL = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT'
 
@@ -37,10 +37,42 @@ DEBUG = False
 
 events = ['reboot', 'toggle_led', 'status', 'temp', 'geolocate', 'custom_command' ]
 
-event_id = "0"
-
 
 print("Running...... Device_id:{}".format(my_device_id))
+
+
+
+
+class Spinner:
+    busy = False
+    delay = 0.1
+
+    @staticmethod
+    def spinning_cursor():
+        while 1:
+            for cursor in '|/-\\': yield cursor
+
+    def __init__(self, delay=None):
+        self.spinner_generator = self.spinning_cursor()
+        if delay and float(delay): self.delay = delay
+
+    def spinner_task(self):
+        while self.busy:
+            sys.stdout.write(next(self.spinner_generator))
+            sys.stdout.flush()
+            time.sleep(self.delay)
+            sys.stdout.write('\b')
+            sys.stdout.flush()
+
+    def __enter__(self):
+        self.busy = True
+        threading.Thread(target=self.spinner_task).start()
+
+    def __exit__(self, exception, value, tb):
+        self.busy = False
+        time.sleep(self.delay)
+        if exception is not None:
+            return False
 
 
 class event(object):
@@ -172,16 +204,19 @@ def handle_commands(commands):
         elif command =='status':
             handle_status(event_id, timestamp)
 
+        elif command =='test':
+            print("test")
+
 
 def fetch_commands():
     try:
-        print"f:",sys.stdout.flush()
+        #print"f:",sys.stdout.flush()
         url = BASE_URL+'/device/commands/{}'.format(my_device_id)
         response = requests.get(url)
         data = response.json()
 
         if data['Items']:
-            print("#: {}").format(str(len(data['Items'])))
+            #print("#: {}").format(str(len(data['Items'])))
             return data['Items']
 
     except:
