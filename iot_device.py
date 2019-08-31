@@ -185,12 +185,11 @@ def handle_commands(commands):
         try:
             event_id = cmd['id']
             timestamp = int(cmd['timestamp'])
+            command = cmd['data']
         except:
             print("Unexpected error 6:", sys.exc_info()[0])
 
         print(event_id)
-
-        command = cmd['data']
 
         if command =='toggle_led':
             handle_toggle_led(event_id,timestamp)
