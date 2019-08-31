@@ -5,6 +5,7 @@ Use the device console at http://demo.iotmicrocloud.com/  to send commands to yo
 ## Optional:
 Download the Android IOT app
 https://play.google.com/store/apps/details?id=com.iotmicrocloud
+(use with config.txt)
 
 ## To setup the Rpi device: 
 Use the button at the bottom of the page to create a unique device ID for your device. 
