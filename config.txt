@@ -1,0 +1,26 @@
+[
+  {
+    "api_name": "Status",
+    "endpoint_type": "POST",
+    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/commands/{device_id}",
+    "json":  "{'eventType':'command', 'data':'status'}"
+  },
+  {
+  	"api_name": "Toggle LED",
+  	"endpoint_type": "POST",
+  	"endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/commands/{device_id}",
+    "json":  "{'eventType':'command', 'data':'toggle_led'}"
+  },
+  {
+    "api_name": "Read temp",
+    "endpoint_type": "POST",
+    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/commands/{device_id}",
+    "json":  '{"eventType":"command", "data":"read_temp"}'
+  },
+  {
+    "api_name": "Device status",
+    "endpoint_type": "GET",
+    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/status/{device_id}",
+    "json":  "{}"
+  }
+]
