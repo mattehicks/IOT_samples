@@ -16,7 +16,7 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 spinner = itertools.cycle(['-', '/', '|', '\\'])
 
-my_device_id = "XXX123"
+my_device_id = "{your device ID}"
 
 BASE_URL = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT'
 
@@ -134,6 +134,10 @@ def handle_reboot(eventID,timestamp):
 def handle_read_temperature(eventID,timestamp):
     #print("READING TEMPERATURE...")
     post_status(eventID,get_temp(),timestamp)
+
+def handle_custom(eventID,timestamp):
+    #print("READING TEMPERATURE...")
+    post_status(eventID,"processed",timestamp)
         
 
 def post_status(eventID, msg_data, timestamp):
@@ -186,25 +190,32 @@ def handle_commands(commands):
             event_id = cmd['id']
             timestamp = int(cmd['timestamp'])
             command = cmd['data']
+            event_type = cmd['eventType']
         except:
             print("Unexpected error 6:", sys.exc_info()[0])
 
-        print(event_id)
 
-        if command =='toggle_led':
-            handle_toggle_led(event_id,timestamp)
+        if event_type == 'command':
 
-        elif command =='reboot':
-            handle_reboot(event_id,timestamp)
+            print("{} :: {}".format(event_id,command))
 
-        elif command =='read_temp':
-            handle_read_temperature(event_id,timestamp)
+            if command =='toggle_led':
+                handle_toggle_led(event_id,timestamp)
 
-        elif command =='status':
-            handle_status(event_id, timestamp)
+            elif command =='reboot':
+                handle_reboot(event_id,timestamp)
 
-        elif command =='test':
-            print("test")
+            elif command =='read_temp':
+                handle_read_temperature(event_id,timestamp)
+
+            elif command =='status':
+                handle_status(event_id, timestamp)
+        
+        elif event_type == 'custom':
+            print ("{} :: {} ".format(event_id, event_type))
+            handle_custom(event_id, timestamp)
+
+
 
 
 def fetch_commands():
