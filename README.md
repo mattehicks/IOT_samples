@@ -9,6 +9,7 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 
 ## Sample program for Pi devices
 Download and run iot_device.py
+
 Change the script to use the unique device ID created below.
 
 ## To setup the Pi device: 
