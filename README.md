@@ -1,9 +1,9 @@
 # IOT_samples
-The IOTmicrocloud platform uses a custom designed AWS pipeline.  
-The platform accepts web input, as well as requests made from the free IOTmicrocloud Android app. 
-Requests are sent with a random deviceID, a unique identifier string and a timestamp.
-The default script just answers back with "OK", but you can change the script to do anything and send any data back that you like.
-The response data is then shown in the web UI, or on the Android display.
+* The IOTmicrocloud platform uses a custom designed AWS pipeline.  
+* The platform accepts web input, as well as requests made from the free IOTmicrocloud Android app. 
+* Requests are sent with a random deviceID, a unique identifier string and a timestamp.
+* The default script just answers back with "OK", but you can change the script to do anything and send any data back that you like.
+* The response data is then shown in the web UI, or on the Android display.
 -Super easy!
 
 
