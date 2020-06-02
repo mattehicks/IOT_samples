@@ -13,16 +13,18 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 
 ## Step 2: Send commands from the IOTMC-Demo platform.
 1. Enter your device ID into the Device ID box  (leave ClientID empty).
-2. Send one of the commands from the dropdowns, or send your own command string.
--- Use the IOT demo at http://demo.iotmicrocloud.com/ to send commands to your device.
+2. Send one of the default commands, or send your own command string using the dropdowns + text box.
+3. Use the IOT demo at http://demo.iotmicrocloud.com/ to send commands to your device.
 
+
+## Optional: Use the totally configurable Android IOT app (developed by me!)
 Note: the mobile app can send default commands, and also be configured to send your own customized commands.
-Just download the config.txt file and edit. 
+Just edit the config.txt file and load it in-app. 
 
 App store link here:
 https://play.google.com/store/apps/details?id=com.iotmicrocloud
 
--Profit!
+-Thanks for trying it out!
 
 
 ![Demo](platform_working.JPG)
