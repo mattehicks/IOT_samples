@@ -9,7 +9,10 @@
 
 
 
-## PI/ARDUINO INSTRUCTIONS
+
+
+## Pi/Arduino INSTRUCTIONS
+
 ## Step 1: Download and run the python app on your device.
 1. Use the button at the bottom of the page to create a unique device ID for your device.  
 2. Download and run "iot_device.py" on your internet connected RaspberryPi or Arduino.
