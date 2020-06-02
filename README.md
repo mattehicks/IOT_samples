@@ -12,7 +12,7 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 4. The script will now respond to commands sent to it from the IOTwebsite Demo.
 
 ## Step 2: Send commands from the IOTMC-Demo platform.
-Enter your device ID into the text box.
+Enter your device ID into the Device ID box  (leave ClientID empty).
 Send one of the commands from the dropdowns, or send your own command string.
 Use the IOT demo at http://demo.iotmicrocloud.com/ to send commands to your device.
 
