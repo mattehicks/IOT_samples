@@ -1,8 +1,9 @@
 # IOT_samples
 * The IOTmicrocloud platform uses a custom designed AWS pipeline.  
 * The platform accepts web input, as well as requests made from the free IOTmicrocloud Android app. 
-* Requests are sent with a random deviceID, a unique identifier string and a timestamp.
-* The default script just answers back with "OK", but you can change the script to do anything and send any data back that you like.
+* Requests are stored with your DeviceID, and a unique identifierID and a timestamp.
+* When you run the python script on your device - it asks for requests from the IOTMC backend and answers back with "OK" once its done processing the command.
+* You can customize the script to do anything and send any data back that you like.
 * The response data is then shown in the web UI, or on the Android display.
 -Super easy!
 
