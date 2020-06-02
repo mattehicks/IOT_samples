@@ -10,7 +10,7 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 ## Sample program for Pi devices
 1. Use the button at the bottom of the page to create a unique device ID for your device.  
 2. Download and run "iot_device.py" on your internet connected RaspberryPi or Arduino.
-3. Be sure to use a unique device ID created below.
+3. Be sure to replace the default deviceID in the script with  your unique deviceID.
 4. The script will now respond to commands sent to it from the IOTwebsite Demo.
 
 ## To setup the Pi device: 
