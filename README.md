@@ -7,10 +7,10 @@
 * The response data is then shown in the web UI, or on the Android display.
 -Super easy!
 
-
-
-
-
+  
+  
+  
+  
 ## Pi/Arduino INSTRUCTIONS
 
 ## Step 1: Download and run the python app on your device.
