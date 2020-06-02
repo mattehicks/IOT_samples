@@ -8,13 +8,8 @@
 -Super easy!
 
 
-## Link to the app:
-Download the Android IOT app
-https://play.google.com/store/apps/details?id=com.iotmicrocloud
-(use with config.txt)
 
-
-## INSTRUCTIONS
+## PI/ARDUINO INSTRUCTIONS
 ## Step 1: Download and run the python app on your device.
 1. Use the button at the bottom of the page to create a unique device ID for your device.  
 2. Download and run "iot_device.py" on your internet connected RaspberryPi or Arduino.
@@ -32,7 +27,7 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 * The app has default commands like "get temp" and "reset device" but can also be configured to send your own customized commands.
 * Just edit the config.txt file and load it in-app. 
 
-App store link here:
+## Link to the app:
 https://play.google.com/store/apps/details?id=com.iotmicrocloud
 
 -Thanks for trying it out!
