@@ -6,13 +6,11 @@
 * You can customize the script to do anything and send any data back that you like.
 * The response data is then shown in the web UI, or on the Android display.
 -Super easy!
+<br/><br/><br/>
 
-  
-  
-  
-  
+
 ## Pi/Arduino INSTRUCTIONS
-
+<br/>
 ## Step 1: Download and run the python app on your device.
 1. Use the button at the bottom of the page to create a unique device ID for your device.  
 2. Download and run "iot_device.py" on your internet connected RaspberryPi or Arduino.
