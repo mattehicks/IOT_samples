@@ -1,10 +1,19 @@
 # IOT_samples
+The IOTmicrocloud platform uses a custom designed AWS pipeline.  
+The platform accepts web input, as well as requests made from the free IOTmicrocloud Android app. 
+Requests are sent with a random deviceID, a unique identifier string and a timestamp.
+The default script just answers back with "OK", but you can change the script to do anything and send any data back that you like.
+The response data is then shown in the web UI, or on the Android display.
+-Super easy!
 
-## Optional:
+
+## Link to the app:
 Download the Android IOT app
 https://play.google.com/store/apps/details?id=com.iotmicrocloud
 (use with config.txt)
 
+
+## INSTRUCTIONS
 ## Step 1: Download and run the python app on your device.
 1. Use the button at the bottom of the page to create a unique device ID for your device.  
 2. Download and run "iot_device.py" on your internet connected RaspberryPi or Arduino.
@@ -18,8 +27,9 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 
 
 ## Optional: Use the totally configurable Android IOT app (developed by me!)
-Note: the mobile app can send default commands, and also be configured to send your own customized commands.
-Just edit the config.txt file and load it in-app. 
+* Just enter your DeviceID at the top of the app, and start sending commands.
+* The app has default commands like "get temp" and "reset device" but can also be configured to send your own customized commands.
+* Just edit the config.txt file and load it in-app. 
 
 App store link here:
 https://play.google.com/store/apps/details?id=com.iotmicrocloud
