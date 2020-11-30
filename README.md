@@ -22,7 +22,7 @@
 3. Use the IOT demo at http://demo.iotmicrocloud.com/ to send commands to your device.
 
 
-## Optional: Use the totally configurable Android IOT app (developed by me!)
+## Optional: Use the totally configurable Android IOT app
 * Just enter your DeviceID at the top of the app, and start sending commands.
 * The app has default commands like "get temp" and "reset device" but can also be configured to send your own customized commands.
 * Just edit the config.txt file and load it in-app. 
