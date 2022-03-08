@@ -1,26 +1,38 @@
 [
+ {
+  "api_name": "RegisterDevice",
+  "endpoint_type": "GET",
+  "endpoint": "https://gjwm6gf7g4.execute-api.us-west-2.amazonaws.com/IOT/registerDevice",
+  "json": ""
+  },
+  {
+    "api_name": "POST API",
+    "endpoint_type": "POST",
+    "endpoint": "http://52.38.29.132:1200/api/v2/testEvent",
+    "json": "{'id':'54','name':'Douglas Halvorson','avatar':'https://s3.amazonaws.com/uifaces/faces/twitter/josep_martins/128.jpg'}"
+  },
   {
     "api_name": "Status",
-    "endpoint_type": "POST",
-    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/commands/{device_id}",
+    "endpoint_type": "GET",
+    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/app/status/{device_id}",
     "json":  "{'eventType':'command', 'data':'status'}"
   },
   {
-  	"api_name": "Toggle LED",
+  	"api_name": "Reboot",
   	"endpoint_type": "POST",
-  	"endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/commands/{device_id}",
-    "json":  "{'eventType':'command', 'data':'toggle_led'}"
+  	"endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/app/commands/{device_id}",
+    "json":  "{'eventType':'command', 'data':'reboot'}"
   },
   {
-    "api_name": "Read temp",
+    "api_name": "Blink LED",
     "endpoint_type": "POST",
-    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/commands/{device_id}",
-    "json":  '{"eventType":"command", "data":"read_temp"}'
+    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/app/commands/{device_id}",
+    "json":  "{'eventType':'command', 'data':'blink_led'}"
   },
   {
-    "api_name": "Device status",
-    "endpoint_type": "GET",
-    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/web/device/status/{device_id}",
-    "json":  "{}"
+    "api_name": "custom",
+    "endpoint_type": "POST",
+    "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/app/commands/{device_id}",
+    "json":  "{'eventType':'custom', 'data':'flow_test'}"
   }
 ]
