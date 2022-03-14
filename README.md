@@ -34,3 +34,4 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 
 
 ![Demo](platform_working.JPG)
+![Demo](MessageFlow.jpg)
