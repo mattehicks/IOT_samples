@@ -4,20 +4,21 @@ Requests are stored with your DeviceID and a timestamp.
 
 The python "IOT" script listens for commands sent from the website, and will answer back with "OK" once its done processing the command, as well as send any information that was requested, like "temperature" or "status" info.  
 
-You can also enter custom commands and in the web text box and on the mobile app, by using the config file provided.
+# Customize the mobile interface to suit your needs.
 
-The config file for the mobile app allows the user to create a custom button layout with custom commands for each.
-Also - the device responses are shown in the app text area.
+You can  enter custom commands and in the web text box and on the mobile app, by using the config file provided.
+The config file allows you to create a your own custom button layout for sending the commands you provide. 
+Device response/data is shown in the app text area.
 
-# Feel free to customize to suit your needs.
-# Also, feel free to reach out with any suggestions or comments.
-# Reddit u/Zapeggo
+
+## Also, feel free to reach out with any suggestions or comments.
+## Reddit u/Zapeggo
 <br/><br/><br/>
 
 Default test device is GA1875.  
 If my Pi3 is up and running - you will get a response :)  
 
-# RUN IN BACKGROUND AND EXIT:  
+# TO RUN PYTHON ON RASPBERRY PI IN THE BACKGROUND AND EXIT:  
  nohup python iot.py &  
   
   
