@@ -1,11 +1,17 @@
-# IOT_samples
-* The IOTmicrocloud platform uses a custom designed AWS pipeline.  
-* The platform accepts web input, as well as requests made from the free IOTmicrocloud Android app. 
-* Requests are stored with your DeviceID, and a unique identifierID and a timestamp.
-* When you run the python script on your device - it asks for requests from the IOTMC backend and answers back with "OK" once its done processing the command. (It loops indefinitely, waiting for more commands).
-* You can customize the script to do anything and send any data back that you like.
-* The response data is then shown in the web UI, or on the Android display.
--Super easy!
+# IOT_samples 
+The backend system handles user input from the Demo Website or the Android app. 
+Requests are stored with your DeviceID and a timestamp.
+
+The python "IOT" script listens for commands sent from the website, and will answer back with "OK" once its done processing the command, as well as send any information that was requested, like "temperature" or "status" info.  
+
+You can also enter custom commands and in the web text box and on the mobile app, by using the config file provided.
+
+The config file for the mobile app allows the user to create a custom button layout with custom commands for each.
+Also - the device responses are shown in the app text area.
+
+# Feel free to customize to suit your needs.
+# Also, feel free to reach out with any suggestions or comments.
+# Reddit u/Zapeggo
 <br/><br/><br/>
 
 Default test device is GA1875.  
