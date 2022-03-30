@@ -38,9 +38,10 @@ If my Pi3 is up and running - you will get a response :)
 * Just enter your DeviceID at the top of the app, and start sending commands.
 * The app has default commands like "get temp" and "reset device" but can also be configured to send your own customized commands.
 * Just edit the config.txt file and load it in-app. 
-![PHONE1](https://user-images.githubusercontent.com/859222/160740720-c6f107bd-f294-4319-ae56-8142b18f7e91.jpg)
-![PHONE2](https://user-images.githubusercontent.com/859222/160740730-ae1b98ea-243c-43ed-b5fa-9294f76faed5.jpg)
 
+![PHONE1](https://user-images.githubusercontent.com/859222/160740720-c6f107bd-f294-4319-ae56-8142b18f7e91.jpg)
+
+![PHONE2](https://user-images.githubusercontent.com/859222/160740895-403f833d-5269-4e26-a88d-05c0d0ad26b5.jpg)
 
 
 ## Link to the app:  
