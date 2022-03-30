@@ -11,9 +11,10 @@
 Default test device is GA1875.  
 If my Pi3 is up and running - you will get a response :)  
 
-## RUN IN BACKGROUND AND EXIT:  
-# nohup python iot.py &  
-
+# RUN IN BACKGROUND AND EXIT:  
+ nohup python iot.py &  
+  
+  
 ## Pi/Arduino INSTRUCTIONS
 ## Step 1: Download and run the python app on your device.
 1. Use the button at the bottom of the page to create a unique device ID for your device.  
