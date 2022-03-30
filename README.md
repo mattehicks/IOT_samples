@@ -22,12 +22,11 @@ If my Pi3 is up and running - you will get a response :)
  nohup python iot.py &  
   
   
-# QUICK START
-## Download and run the python app on your device.
+#  RASPBERRY PI QUICK START
 1. Use the button at the bottom of the page to create a unique device ID for your device.  
 2. Replace the default deviceID in the script with your unique deviceID (6 digits, Numbers and Letters).
 3. Download and run "iot.py" on your internet connected device (RPi3).
-4. Interact with your device via the MicroCloud Demo website.
+4. Interact with your device via the IOTMicroCloud Demo website.
 
 ## Using the Demo website.  
 1. Enter your device ID into the Device ID box  (leave ClientID empty).
@@ -39,6 +38,10 @@ If my Pi3 is up and running - you will get a response :)
 * Just enter your DeviceID at the top of the app, and start sending commands.
 * The app has default commands like "get temp" and "reset device" but can also be configured to send your own customized commands.
 * Just edit the config.txt file and load it in-app. 
+![PHONE1](https://user-images.githubusercontent.com/859222/160740720-c6f107bd-f294-4319-ae56-8142b18f7e91.jpg)
+![PHONE2](https://user-images.githubusercontent.com/859222/160740730-ae1b98ea-243c-43ed-b5fa-9294f76faed5.jpg)
+
+
 
 ## Link to the app:  
 https://play.google.com/store/apps/details?id=com.iotmicrocloud
