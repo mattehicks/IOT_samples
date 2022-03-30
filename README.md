@@ -8,6 +8,8 @@
 -Super easy!
 <br/><br/><br/>
 
+Default test device is GA1875.
+If my Pi3 is up and running - you will get a response :)
 
 ## Pi/Arduino INSTRUCTIONS
 ## Step 1: Download and run the python app on your device.
