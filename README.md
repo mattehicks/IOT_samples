@@ -12,8 +12,8 @@ Device response/data is shown in the app text area.
 
 
 ## Also, feel free to reach out with any suggestions or comments.
-## Reddit u/Zapeggo
-<br/><br/><br/>
+Reddit u/Zapeggo
+  
 
 Default test device is GA1875.  
 If my Pi3 is up and running - you will get a response :)  
