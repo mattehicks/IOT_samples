@@ -16,7 +16,7 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 spinner = itertools.cycle(['-', '/', '|', '\\'])
 
-my_device_id = "{your device ID}"
+my_device_id = "GA1875"
 
 BASE_URL = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT'
 
@@ -89,6 +89,7 @@ def get_temp():
     f = open(device_file, 'r')
     lines = f.readlines()
     f.close()
+    print('temp')
 
     while lines[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
@@ -98,7 +99,7 @@ def get_temp():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
-
+        print(temp_f)
         return temp_f
 
 def setupIO():
@@ -147,6 +148,8 @@ def post_status(eventID, msg_data, timestamp):
     requests.method = "POST"
     requests.httpBody = data
 
+    print("posting: ")
+    print(data)
     try:
         response = requests.post(status_url, data=data_json, headers=headers)
         if DEBUG:
@@ -221,13 +224,18 @@ def handle_commands(commands):
 def fetch_commands():
     try:
         #print"f:",sys.stdout.flush()
+        #print("get")
         url = BASE_URL+'/device/commands/{}'.format(my_device_id)
-        response = requests.get(url)
+        #print(url)
+        response = requests.get(url) 
+
         data = response.json()
 
         if data['Items']:
-            #print("#: {}").format(str(len(data['Items'])))
-            return data['Items']
+            if len(data['Items']):
+                print('found')
+                #print("#: {}").format(str(len(data['Items'])))
+                return data['Items']
 
     except:
         print("Unexpected error 3:", sys.exc_info()[0])
@@ -242,6 +250,8 @@ while True:
         handle_commands(commands)
         #sys.stdout.write(".")
         #sys.stdout.flush()
+
+
 
 
 
