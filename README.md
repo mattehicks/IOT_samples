@@ -5,33 +5,35 @@ Requests are stored with your DeviceID and a timestamp.
 The python "IOT" script listens for commands sent from the website, and will answer back with "OK" once its done processing the command, as well as send any information that was requested, like "temperature" or "status" info.  
 
 # Customize the mobile interface to suit your needs.
-
 You can  enter custom commands and in the web text box and on the mobile app, by using the config file provided.
 The config file allows you to create a your own custom button layout for sending the commands you provide. 
 Device response/data is shown in the app text area.
 
 
-## Also, feel free to reach out with any suggestions or comments.
-Reddit u/Zapeggo
-  
-
-Default test device is GA1875.  
-If my Pi3 is up and running - you will get a response :)  
-
 # TO RUN PYTHON ON RASPBERRY PI IN THE BACKGROUND AND EXIT:  
  nohup python iot.py &  
-  
-  
-#  RASPBERRY PI QUICK START
-1. Use the button at the bottom of the page to create a unique device ID for your device.  
-2. Replace the default deviceID in the script with your unique deviceID (6 digits, Numbers and Letters).
-3. Download and run "iot.py" on your internet connected device (RPi3).
-4. Interact with your device via the IOTMicroCloud Demo website.
+ 
 
-## Using the Demo website.  
-1. Enter your device ID into the Device ID box  (leave ClientID empty).
-2. Send one of the default commands, or send your own command string using the dropdowns + text box.
-3. Use the IOT demo at http://demo.iotmicrocloud.com/ to send commands to your device.
+## Using the IOT Control Web Platform.  
+1. Click the 'Create ID' button, then the 'Add Device' button.   
+    This will create a new unique id that you can use in your raspberry pi code.
+    
+2. The "Client ID" box can be empty, but is useful for securing your commands - which would require both boxes to be populated. 
+     Note: You will have to validate these values in your Rpi or device code.
+     
+3. There is a default device already populated called GA1875.  This is a Raspberry Pi device running the included Python sample code (with a temp sensor attached).     
+
+4. Install the python IOT.py sample code on your Raspberry, and run it on your internet connected device. The python instructions are listed above.
+ 
+5. Click on 'SEND' or type your own command string using the dropdowns + text box.
+
+6. After the Rpi device receives the command, it should send a response back - which will be shown in the message table.
+
+7. Optional: Use the IOT Android app to send commands to your devices.
+
+
+
+ ![FireShot Capture 001 - IOT Demo - demo iotmicrocloud com](https://user-images.githubusercontent.com/859222/161655495-c82aef16-424b-471b-9c57-847937079127.png)
 
 
 ## Using the Android IOT app  
@@ -48,6 +50,4 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 -Thanks for trying it out!  
   
     
- ![FireShot Capture 001 - IOT Demo - demo iotmicrocloud com](https://user-images.githubusercontent.com/859222/161655495-c82aef16-424b-471b-9c57-847937079127.png)
 
-![Demo](msg_flow.jpg)
