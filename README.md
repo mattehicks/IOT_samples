@@ -10,7 +10,7 @@ The config file allows you to create a your own custom button layout for sending
 Device response/data is shown in the app text area.
 
 
-# TO RUN PYTHON ON RASPBERRY PI IN THE BACKGROUND AND EXIT:  
+# Running python samples in the background and exit (on Rpi/Linux):  
  nohup python iot.py &  
  
 
