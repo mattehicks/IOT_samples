@@ -45,8 +45,9 @@ If my Pi3 is up and running - you will get a response :)
 ## Link to the app:  
 https://play.google.com/store/apps/details?id=com.iotmicrocloud
 
--Thanks for trying it out!
-
-![FireShot Capture 001 - IOT Demo - demo iotmicrocloud com](https://user-images.githubusercontent.com/859222/161655368-db2018bc-3dbd-4010-a567-9509c635226c.png)
+-Thanks for trying it out!  
+  
+    
+ ![FireShot Capture 001 - IOT Demo - demo iotmicrocloud com](https://user-images.githubusercontent.com/859222/161655495-c82aef16-424b-471b-9c57-847937079127.png)
 
 ![Demo](msg_flow.jpg)
