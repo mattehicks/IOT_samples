@@ -31,7 +31,7 @@ Device response/data is shown in the app text area.
 
 7. Optional: Use the IOT Android app to send commands to your devices.
 
- ![FireShot Capture 002 - IOT Demo - demo iotmicrocloud com](https://user-images.githubusercontent.com/859222/161656503-aec54913-555b-4f26-8e40-873dabc4e2cc.png)
+ ![FireShot Capture 002 - IOT Demo - demo iotmicrocloud com](https://user-images.githubusercontent.com/859222/161656646-5c974f0a-5691-4fef-ab67-ea53fd38f9fa.png)
 
 
 ## Using the Android IOT app  
