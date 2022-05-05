@@ -65,7 +65,5 @@ https://play.google.com/store/apps/details?id=com.iotmicrocloud
 ## Mobile phone users
   The website works well on mobile also!
   
-  ![Screenshot_20220505-103116](https://user-images.githubusercontent.com/859222/166980117-8448b664-08a3-450e-abec-4b42cdac6c3b.png)
-
-
+![Screenshot_20220505-103116](https://user-images.githubusercontent.com/859222/166980451-e7ff6aea-443a-4e25-b6d2-c7967eb514b2.png)
 
