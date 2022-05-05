@@ -42,12 +42,15 @@ Device response/data is shown in the app text area.
 ## Customizing the mobile app buttons
 * Open the config.txt file from this repo
 * Substitute your custom "Name" and "Json" string. (Leave the default endpoint + endpoint type).
-Example: 
+  
+  Example: 
 ```
+{
     "api_name": "MY_CUSTOM_BUTTON",
     "endpoint_type": "POST",
     "endpoint": "https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/app/commands/{device_id}",
     "json":  "{'eventType':'custom', 'data':'ANY_DATA_YOU_WANT_TO_SEND'}"
+}
 ```
   
 ![PHONE1](https://user-images.githubusercontent.com/859222/160740720-c6f107bd-f294-4319-ae56-8142b18f7e91.jpg)  ![PHONE2](https://user-images.githubusercontent.com/859222/160740895-403f833d-5269-4e26-a88d-05c0d0ad26b5.jpg)
