@@ -34,7 +34,7 @@ Device response/data is shown in the app text area.
  ![FireShot Capture 002 - IOT Demo - demo iotmicrocloud com](https://user-images.githubusercontent.com/859222/161656646-5c974f0a-5691-4fef-ab67-ea53fd38f9fa.png)
 
 
-## Using the Android IOT app  
+## Using the Mobile app  
 * Just enter your DeviceID at the top of the app, and start sending commands.
 * The app has default commands like "get temp" and "reset device" but can also be configured to send your own customized commands.
 * Just edit the config.txt file and load it in-app. 
