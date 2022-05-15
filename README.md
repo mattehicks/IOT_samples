@@ -1,3 +1,7 @@
+# Tutorial for Rpi3 Temperature Sensor 
+(you will fill-in your variables in the iot.py application)
+https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
+
 # IOT_samples 
 The backend system handles user input from the Demo Website or the Android app. 
 Requests are stored with your DeviceID and a timestamp.
