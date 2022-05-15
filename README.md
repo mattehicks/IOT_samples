@@ -1,5 +1,4 @@
-## Tutorial for Rpi3 Temperature Sensor  
-## (you will fill-in your variables in the iot.py application)
+## Tutorial for Rpi3 Temperature Sensor  (you will fill-in your variables in the iot.py application)
 https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
 
 # IOT_samples 
