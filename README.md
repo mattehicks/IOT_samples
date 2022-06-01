@@ -32,6 +32,7 @@ Device response/data is shown in the app text area.
 5. Click on 'SEND' or type your own command string using the dropdowns + text box.
 
 6. After the Rpi device receives the command, it should send a response back - which will be shown in the message table.
+   BE SURE TO DISABLE ADBLOCK.
 
 7. Optional: Use the IOT Android app to send commands to your devices.
 
