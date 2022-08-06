@@ -1,12 +1,13 @@
-## Tutorial for Rpi3 Temperature Sensor  
-(you will fill-in your variables in the iot.py application)  
-https://www.circuitbasics.com/raspberry-pi-ds18b20-temperature-sensor-tutorial/
+## Overview
 
-# IOT_samples 
-The backend system handles user input from the Demo Website or the Android app. 
-Requests are stored with your DeviceID and a timestamp.
+# Python sample script:
+The python "IOT" script will run on RaspberyPi devices. It has 2 main functions:
+1. Listen for commands sent from the website, and will answer back with "OK" once its done processing the command.
+2. Send back any status, sensor data, or messages. 
 
-The python "IOT" script listens for commands sent from the website, and will answer back with "OK" once its done processing the command, as well as send any information that was requested, like "temperature" or "status" info.  
+INSTRUCTIONS: Download the script using this command on your Pi:
+wget 
+
 
 # Customize the mobile interface to suit your needs.
 You can  enter custom commands and in the web text box and on the mobile app, by using the config file provided.
