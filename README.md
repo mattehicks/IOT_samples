@@ -8,20 +8,11 @@ The python "IOT" script will run on RaspberyPi devices. It has 2 main functions:
 INSTRUCTIONS: Download the script using this command on your Pi:  
 wget https://github.com/mattehicks/IOT_samples/edit/master/iot_device.py
 
-
-# Customize the mobile interface to suit your needs.
-You can  enter custom commands and in the web text box and on the mobile app, by using the config file provided.
-The config file allows you to create a your own custom button layout for sending the commands you provide. 
-Device response/data is shown in the app text area.
-
-The default config file can be downloaded here:  
-https://drive.google.com/file/d/1GOUrb33zQEIU4QfK6yqLE7qN93EL857Y/view?usp=sharing
-
 # Running python samples in the background and exit (on Rpi/Linux):  
  nohup python iot.py &  
  
 
-## Using the IOT Control Web Platform.  
+## Using the Web Platform.  
 1. Click the 'Create ID' button, then the 'Add Device' button.   
     This will create a new unique id that you can use in your raspberry pi code.
     
@@ -47,9 +38,13 @@ https://drive.google.com/file/d/1GOUrb33zQEIU4QfK6yqLE7qN93EL857Y/view?usp=shari
 * The app has default commands like "get temp" and "reset device" but can also be configured to send your own customized commands.
 * Just edit the config.txt file and load it in-app. 
 
-## Customizing the mobile app buttons
-* Open the config.txt file from this repo
-* Substitute your custom "Name" and "Json" string. (Leave the default endpoint + endpoint type).
+! You will need to load a button layout  
+The default config file can be downloaded here:  
+https://drive.google.com/file/d/1GOUrb33zQEIU4QfK6yqLE7qN93EL857Y/view?usp=sharing  
+
+The config file allows you to create a your own custom button layout for sending the commands you provide. 
+* Open the config.txt file from this repo  
+* Substitute your custom "Name" and "Json" string. (Leave the default endpoint + endpoint type).  
   
   Example: 
 ```
