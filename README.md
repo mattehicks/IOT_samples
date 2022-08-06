@@ -10,7 +10,8 @@ wget https://github.com/mattehicks/IOT_samples/edit/master/iot_device.py
 
 ## Running python samples in the background and exit (on Rpi/Linux):  
  nohup python iot.py &  
- 
+  
+  
 
 ## Using the Web Platform.  
 1. Click the 'Create ID' button, then the 'Add Device' button.   
