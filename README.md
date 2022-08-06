@@ -14,7 +14,7 @@ You can  enter custom commands and in the web text box and on the mobile app, by
 The config file allows you to create a your own custom button layout for sending the commands you provide. 
 Device response/data is shown in the app text area.
 
-The default config file can be downloaded here:
+The default config file can be downloaded here:  
 https://drive.google.com/file/d/1GOUrb33zQEIU4QfK6yqLE7qN93EL857Y/view?usp=sharing
 
 # Running python samples in the background and exit (on Rpi/Linux):  
