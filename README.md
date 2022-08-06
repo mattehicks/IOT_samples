@@ -1,12 +1,12 @@
-## Overview
+# Overview
 
-# Python sample script:
+## Python sample script:
 The python "IOT" script will run on RaspberyPi devices. It has 2 main functions:
 1. Listen for commands sent from the website, and will answer back with "OK" once its done processing the command.
 2. Send back any status, sensor data, or messages. 
 
 INSTRUCTIONS: Download the script using this command on your Pi:
-wget 
+wget https://github.com/mattehicks/IOT_samples/edit/master/iot_device.py
 
 
 # Customize the mobile interface to suit your needs.
