@@ -12,7 +12,10 @@ wget https://github.com/mattehicks/IOT_samples/edit/master/iot_device.py
  nohup python iot.py &  
   
   
-
+  
+  ---
+    
+    
 ## Using the Web Platform.  
 1. Click the 'Create ID' button, then the 'Add Device' button.   
     This will create a new unique id that you can use in your raspberry pi code.
