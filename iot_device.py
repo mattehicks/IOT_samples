@@ -1,47 +1,47 @@
 import requests
 import json
 import time
-from datetime import datetime
+from threading import Event
+# from datetime import datetime
 import RPi.GPIO as GPIO
 import sys
 import os
 import glob
 import itertools, sys
 import threading
-
-#os.system('modprobe w1-gpio')
-#os.system('modprobe w1-therm')
-base_dir = '/sys/bus/w1/devices/'
-device_folder = glob.glob(base_dir + '28*')[0]
-device_file = device_folder + '/w1_slave'
-spinner = itertools.cycle(['-', '/', '|', '\\'])
+import subprocess
+import math
 
 my_device_id = "GA1875"
+blinkerIO = 17  #pinouts
+tempIO = 26     #pinouts
+DEBUG = False   #pinouts
+TEMP = True
+#os.system('modprobe w1-gpio')
+#os.system('modprobe w1-therm')
+
+spinner = itertools.cycle(['-', '/', '|', '\\'])
 
 BASE_URL = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT'
+apiUrl = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/device'
 
-poll_url = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/device'
-post_url = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/device'
+fetch_url = apiUrl+'/commands/{}'.format(my_device_id)
+status_url = apiUrl+'/status/{}'.format(my_device_id)
 
-temp_sensor = "/sys/bus/w1/devices/28-02131e0b69aa/w1_slave"
-
-
-fetch_url = poll_url+'/commands/{}'.format(my_device_id)
-status_url = post_url+'/status/{}'.format(my_device_id)
-
-#pinouts
-blinkerIO = 17
-tempIO = 26
-
-DEBUG = False
+#TEMP = true
+if TEMP is True:
+    base_dir = '/sys/bus/w1/devices/'
+    device_folder = glob.glob(base_dir + '28*')[0]
+    device_file = device_folder + '/w1_slave'
+    temp_sensor = "/sys/bus/w1/devices/28-02131e0b69aa/w1_slave"
 
 events = ['reboot', 'toggle_led', 'status', 'temp', 'geolocate', 'custom_command' ]
 
-
 print("Running...... Device_id:{}".format(my_device_id))
 
-
-
+def setupServices():
+    #create auto-run service
+    print("service created")
 
 class Spinner:
     busy = False
@@ -74,9 +74,8 @@ class Spinner:
         if exception is not None:
             return False
 
-
 class event(object):
-    #event_id
+    #request_id
     #timestamp
     #event_type
     #data
@@ -84,12 +83,10 @@ class event(object):
 
     pass
 
-
 def get_temp():
     f = open(device_file, 'r')
     lines = f.readlines()
     f.close()
-    print('temp')
 
     while lines[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
@@ -99,8 +96,12 @@ def get_temp():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
-        print(temp_f)
+        print("temp_f: " + str(temp_f))
         return temp_f
+
+def get_system_metrics():
+    result = subprocess.run(['ls', '-l'], stdout=subprocess.PIPE)
+    print( "RESULT: " + result)
 
 def setupIO():
     GPIO.setmode(GPIO.BCM)
@@ -108,13 +109,11 @@ def setupIO():
     GPIO.setup(blinkerIO,GPIO.OUT)
     GPIO.setup(tempIO,GPIO.OUT)
     
-
 def blinker():
     GPIO.output(blinkerIO,GPIO.HIGH)
     time.sleep(1)
     GPIO.output(blinkerIO,GPIO.LOW)
     
-
 def handle_toggle_led(eventID,timestamp):
     #handle_toggle_led
     #print("TOGGLING LED...")
@@ -126,12 +125,10 @@ def handle_toggle_led(eventID,timestamp):
         GPIO.output(tempIO,GPIO.LOW)
         post_status(eventID,"OK",timestamp)
         
-
 def handle_reboot(eventID,timestamp):
     #print("REBOOTING DEVICE...")
     post_status(eventID,"rebooting",timestamp)
     
-
 def handle_read_temperature(eventID,timestamp):
     #print("READING TEMPERATURE...")
     post_status(eventID,get_temp(),timestamp)
@@ -142,115 +139,125 @@ def handle_custom(eventID,timestamp):
         
 
 def post_status(eventID, msg_data, timestamp):
-    data = {'event_id' : eventID, 'timestamp': timestamp, 'eventType':'status', 'message': msg_data }
+    data = {'request_id' : eventID, 'timestamp': timestamp, 'event_type':'status', 'data': msg_data }
     data_json = json.dumps(data)
     headers = {'Content-type': 'application/json', "httpMethod": "POST"}
     requests.method = "POST"
     requests.httpBody = data
 
-    print("posting: ")
+    print("posting status: ")
     print(data)
     try:
         response = requests.post(status_url, data=data_json, headers=headers)
-        if DEBUG:
-            print("data:   {}".format(data_json))
-            print("Post Status response: {}".format(response))
+        
+        print("response: {}".format(response))
         return response
     except:
         print("Unexpected error 1:", sys.exc_info()[0])
         
 
-def handle_status(event_id, timestamp):
-    if DEBUG:
-        print("handle status...")
+def handle_status(request_id, timestamp):
+    msg_data = {}
+    timestamp = math.floor(time.time());
         
     #simulated systems data
-    voltage = "5.00v"
-    geolocation = "100 x 100"
-    version = "v3.10"
-    subsystems = "subsystems Ax100"
-    network = "network strength: 55"
+    volt = {"voltage":5.0}
+    loc =  {"geolocation":"100x100"}
+    version = {"version":"v3.10"}
+    subsys = {"subsystems":"Ax100"}
+    network = {"network":"network55OC"}
 
-    temp = get_temp()
+    if TEMP:
+        t = get_temp()
+        temp = {"temp":t}
+        msg_data['temp'] = t
 
-    msg_data = "voltage:{}, temp:{}, geo:{}, bus:{}, network:{},version:{}".format(voltage, temp, geolocation, subsystems, network, version)
-    #msg_data = json.loads(msg_data)
-
+    #msg_data['request_id'] = request_id
+    print("Outgoing: ")
+    print(msg_data)
+    
     if DEBUG:
         print(msg_data)
     
-    post_status(event_id, msg_data, timestamp)
+    post_status(request_id, msg_data, timestamp)
     
-
 def handle_commands(commands):
     if not commands:
         return
         #commands is all database columns
 
+#TODO : IF MULTIPLE COMMANDS FOUND, SORT BY TIME?
     for cmd in commands:
-        #command id is random string in database
+        
         try:
-            event_id = cmd['id']
-            timestamp = int(cmd['timestamp'])
-            command = cmd['data']
-            event_type = cmd['eventType']
+            request_id = cmd['request_id']
+            timestamp = math.floor(time.time());
+            command = cmd['command']
+            event_type = cmd['event_type']
         except:
             print("Unexpected error 6:", sys.exc_info()[0])
 
+        print("Handling command:  " + command)
+        # if event_type == 'command':
+        #     print("{} :: {}".format(request_id,command))
 
-        if event_type == 'command':
+        if command =='toggle_led':
+            handle_toggle_led(request_id,timestamp)
 
-            print("{} :: {}".format(event_id,command))
+        elif command =='reboot':
+            handle_reboot(request_id,timestamp)
 
-            if command =='toggle_led':
-                handle_toggle_led(event_id,timestamp)
+        elif command =='read_temp':
+            handle_read_temperature(request_id,timestamp)
 
-            elif command =='reboot':
-                handle_reboot(event_id,timestamp)
-
-            elif command =='read_temp':
-                handle_read_temperature(event_id,timestamp)
-
-            elif command =='status':
-                handle_status(event_id, timestamp)
+        elif command =='status':
+            handle_status(request_id, timestamp)
         
         elif event_type == 'custom':
-            print ("{} :: {} ".format(event_id, event_type))
-            handle_custom(event_id, timestamp)
-
-
-
+            print ("{} :: {} ".format(request_id, event_type))
+            handle_custom(request_id, timestamp)
+        else:
+            print("No handler for command: " + command)
+         
 
 def fetch_commands():
     try:
-        #print"f:",sys.stdout.flush()
-        #print("get")
+        print(".")
         url = BASE_URL+'/device/commands/{}'.format(my_device_id)
-        #print(url)
-        response = requests.get(url) 
 
+        # print(url)
+        response = requests.get(url) 
         data = response.json()
+        print(data)
 
         if data['Items']:
             if len(data['Items']):
                 print('found')
+                print(data['Items'])
                 #print("#: {}").format(str(len(data['Items'])))
                 return data['Items']
 
     except:
-        print("Unexpected error 3:", sys.exc_info()[0])
+        print("Fetch commands: ", sys.exc_info()[0])
+        print(data)
         pass
 
 
 setupIO()
 
+# #run once
+# commands = fetch_commands()
+# handle_commands(commands)
+
+
+
 while True:
-    with Spinner():
-        commands = fetch_commands()
-        handle_commands(commands)
+    #with Spinner():
+    Event().wait(5) 
+    commands = fetch_commands()
+    handle_commands(commands)
         #sys.stdout.write(".")
         #sys.stdout.flush()
-
 
 
 
