@@ -228,7 +228,7 @@ def fetch_commands():
         # print(url)
         response = requests.get(url) 
         data = response.json()
-        print(data)
+        # print(data)
 
         if data['Items']:
             if len(data['Items']):
