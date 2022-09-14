@@ -11,7 +11,10 @@ import itertools, sys
 import threading
 import subprocess
 import math
+import html 
 
+
+debug = False
 my_device_id = "GA1875"
 blinkerIO = 17  #pinouts
 tempIO = 26     #pinouts
@@ -19,8 +22,6 @@ DEBUG = False   #pinouts
 TEMP = True
 #os.system('modprobe w1-gpio')
 #os.system('modprobe w1-therm')
-
-spinner = itertools.cycle(['-', '/', '|', '\\'])
 
 BASE_URL = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT'
 apiUrl = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/device'
@@ -43,36 +44,6 @@ def setupServices():
     #create auto-run service
     print("service created")
 
-class Spinner:
-    busy = False
-    delay = 0.1
-
-    @staticmethod
-    def spinning_cursor():
-        while 1:
-            for cursor in '|/-\\': yield cursor
-
-    def __init__(self, delay=None):
-        self.spinner_generator = self.spinning_cursor()
-        if delay and float(delay): self.delay = delay
-
-    def spinner_task(self):
-        while self.busy:
-            sys.stdout.write(next(self.spinner_generator))
-            sys.stdout.flush()
-            time.sleep(self.delay)
-            sys.stdout.write('\b')
-            sys.stdout.flush()
-
-    def __enter__(self):
-        self.busy = True
-        threading.Thread(target=self.spinner_task).start()
-
-    def __exit__(self, exception, value, tb):
-        self.busy = False
-        time.sleep(self.delay)
-        if exception is not None:
-            return False
 
 class event(object):
     #request_id
@@ -96,12 +67,17 @@ def get_temp():
         temp_string = lines[1][equals_pos+2:]
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
-        print("temp_f: " + str(temp_f))
+        temp_f = "{:.2f}".format(temp_f)
+
+        if debug == True:
+            print("temp_f: " + str(temp_f))
         return temp_f
 
 def get_system_metrics():
     result = subprocess.run(['ls', '-l'], stdout=subprocess.PIPE)
-    print( "RESULT: " + result)
+    return str(result)
+    if debug == True:
+        print( "RESULT: " + result)
 
 def setupIO():
     GPIO.setmode(GPIO.BCM)
@@ -114,7 +90,7 @@ def blinker():
     time.sleep(1)
     GPIO.output(blinkerIO,GPIO.LOW)
     
-def handle_toggle_led(eventID,timestamp):
+def handle_toggle_led(requestID,timestamp):
     #handle_toggle_led
     #print("TOGGLING LED...")
     if DEBUG:
@@ -123,23 +99,35 @@ def handle_toggle_led(eventID,timestamp):
         GPIO.output(tempIO,GPIO.HIGH)
         time.sleep(2)
         GPIO.output(tempIO,GPIO.LOW)
-        post_status(eventID,"OK",timestamp)
+        post_status(requestID,"OK",timestamp)
         
-def handle_reboot(eventID,timestamp):
+def handle_reboot(requestID,timestamp):
     #print("REBOOTING DEVICE...")
-    post_status(eventID,"rebooting",timestamp)
+    post_status(requestID,"rebooting",timestamp)
     
-def handle_read_temperature(eventID,timestamp):
+def handle_read_temperature(requestID,timestamp):
     #print("READING TEMPERATURE...")
-    post_status(eventID,get_temp(),timestamp)
+    post_status(requestID,get_temp(),timestamp)
 
-def handle_custom(eventID,timestamp):
+def handle_custom( requestID,timestamp, command):
     #print("READING TEMPERATURE...")
-    post_status(eventID,"processed",timestamp)
+
+    print("Terminal command: " + command)
+    # result = subprocess.check_output([command])
+    result = os.popen(command).read()
+    output = html.escape(result, quote=True)
+    
+    print("result")
+    print(output)
+    print()
+    print(result)
+    post_status(requestID, output ,timestamp, "custom")
         
 
-def post_status(eventID, msg_data, timestamp):
-    data = {'request_id' : eventID, 'timestamp': timestamp, 'event_type':'status', 'data': msg_data }
+def post_status(requestID, msg_data, timestamp, eventType='status'):
+
+    event_type = eventType
+    data = {'request_id' : requestID, 'timestamp': timestamp, 'event_type': event_type, 'data': msg_data }
     data_json = json.dumps(data)
     headers = {'Content-type': 'application/json', "httpMethod": "POST"}
     requests.method = "POST"
@@ -149,7 +137,6 @@ def post_status(eventID, msg_data, timestamp):
     print(data)
     try:
         response = requests.post(status_url, data=data_json, headers=headers)
-        
         print("response: {}".format(response))
         return response
     except:
@@ -186,7 +173,6 @@ def handle_commands(commands):
         return
         #commands is all database columns
 
-#TODO : IF MULTIPLE COMMANDS FOUND, SORT BY TIME?
     for cmd in commands:
         
         try:
@@ -200,6 +186,8 @@ def handle_commands(commands):
         print("Handling command:  " + command)
         # if event_type == 'command':
         #     print("{} :: {}".format(request_id,command))
+        if command =='get_ip':
+            handle_custom(request_id, timestamp, "hostname -I | awk '{print $1}'")
 
         if command =='toggle_led':
             handle_toggle_led(request_id,timestamp)
@@ -214,15 +202,16 @@ def handle_commands(commands):
             handle_status(request_id, timestamp)
         
         elif event_type == 'custom':
-            print ("{} :: {} ".format(request_id, event_type))
-            handle_custom(request_id, timestamp)
+            print ("{} :: {} ".format(request_id, command))
+            handle_custom(request_id, timestamp, command)
         else:
             print("No handler for command: " + command)
+        print("")
          
 
 def fetch_commands():
     try:
-        print(".")
+        # print(".")
         url = BASE_URL+'/device/commands/{}'.format(my_device_id)
 
 #        print(url)
@@ -252,12 +241,9 @@ setupIO()
 
 
 while True:
-    #with Spinner():
     Event().wait(5) 
     commands = fetch_commands()
     handle_commands(commands)
-        #sys.stdout.write(".")
-        #sys.stdout.flush()
 
 
 

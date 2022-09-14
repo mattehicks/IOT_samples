@@ -14,6 +14,24 @@ SINGLE_ONLY='0'
 OFFLINE_ARG='-o'
 DEPLOY_ARGS=''
 
+#NOTE:  ALL DATES IN UTC TIME !!!
+
+#CONNECTING WITH SSH FORWARDING
+# ssh variables
+#host = '18.252.109.50'
+host = '10.0.1.254'
+localhost = 'localhost'
+ssh_username = 'em7admin'
+private_key = './matt.pem'
+
+#VARIABLE NAMES FOR EMC APPS AND ENTITIES in SL1
+missionval = "MP Mission"
+planval = "MP Plan"
+terminalval = "MP Terminal"
+modemval = "MP Modem"
+emsmodemval = "EMS Modem"
+emscontrollerval = "EMS Controller"
+emsemulatorval = "EMS Emulator"
 
 fail()
 {
