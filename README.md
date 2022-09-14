@@ -9,7 +9,7 @@ INSTRUCTIONS: Download the script using this command on your Pi:
 wget https://github.com/mattehicks/IOT_samples/edit/master/iot_device.py
 
 ## Running the sample code:  
-  nohup python iot.py &
+  nohup python iot.py &  
   or  
   python iot.py > /dev/null &  
   To run in background and exit ssh:  
