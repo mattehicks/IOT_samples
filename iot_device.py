@@ -1,9 +1,8 @@
-from concurrent.futures import process
-import getopt
 import requests
 import json
 import time
 from threading import Event
+# from datetime import datetime
 import RPi.GPIO as GPIO
 import sys
 import os
@@ -13,59 +12,7 @@ import threading
 import subprocess
 import math
 
-
-#script name/version - essential for iotmc manager
-sw_version = "iotmc_001"
-author = "M.Hicks"
-
-
-# Get command-line arguments
-full_cmd_arguments = sys.argv
-argument_list = full_cmd_arguments[1:]
-
-short_options = ["s","q"]
-long_options = ["status","quick"]
-rand_options = ['id']
-
-try:
-    arguments, values = getopt.getopt(argument_list, short_options, long_options, rand_options)
-except getopt.error as err:
-    print (str(err))
-    sys.exit(2)
-
-for current_argument, current_value in arguments:
-    if current_argument in ("-s", "--status"):
-        STATUS_MODE = True
-        print ("Enabling STATUS UPDATE mode")
-    if current_argument in ("-q", "--quick"):
-        QUICK_MODE = True
-        print ("Enabling QUICK mode")
-    if current_argument in ("-id"):
-        device_id = current_value
-        os.environ["DEVICEID"] = current_value
-        print (("Device ID set to: (%s)") % (current_value))
-
-# device_id = "GA1875"
-if device_id is None:
-    #prompt user for device ID
-    if os.environ["DEVICEID"] is None:
-        device_id = input("Enter your device ID: (blank for 'create new') ")
-        if device_id == "":
-            device_id = create_device()
-
-        #check IOTMC for device ID
-
-    #save to system variable
-
-
-
-#create a IOT_PROC file (so the iot_main will pause when it sees this proc ID)
-process_id = "IOTMC"
-
-commandlist = [emsmodemstatus]
-devicelist = [emsmodemval]
-
-
+my_device_id = "GA1875"
 blinkerIO = 17  #pinouts
 tempIO = 26     #pinouts
 DEBUG = False   #pinouts
@@ -73,14 +20,13 @@ TEMP = True
 #os.system('modprobe w1-gpio')
 #os.system('modprobe w1-therm')
 
+spinner = itertools.cycle(['-', '/', '|', '\\'])
+
 BASE_URL = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT'
 apiUrl = 'https://snscoseiud.execute-api.us-west-2.amazonaws.com/IOT/device'
 
-commands_url = apiUrl+'/commands/{}'.format(device_id)
-status_url = apiUrl+'/status/{}'.format(device_id)
-events_url = apiUrl+'/events/{}'.format(device_id)
-user_url = apiUrl+'/user/{}'.format(device_id)
-
+fetch_url = apiUrl+'/commands/{}'.format(my_device_id)
+status_url = apiUrl+'/status/{}'.format(my_device_id)
 
 #TEMP = true
 if TEMP is True:
@@ -91,15 +37,42 @@ if TEMP is True:
 
 events = ['reboot', 'toggle_led', 'status', 'temp', 'geolocate', 'custom_command' ]
 
-print("Running...... Device_id:{}".format(device_id))
-
-def create_device()
-
+print("Running...... Device_id:{}".format(my_device_id))
 
 def setupServices():
     #create auto-run service
     print("service created")
 
+class Spinner:
+    busy = False
+    delay = 0.1
+
+    @staticmethod
+    def spinning_cursor():
+        while 1:
+            for cursor in '|/-\\': yield cursor
+
+    def __init__(self, delay=None):
+        self.spinner_generator = self.spinning_cursor()
+        if delay and float(delay): self.delay = delay
+
+    def spinner_task(self):
+        while self.busy:
+            sys.stdout.write(next(self.spinner_generator))
+            sys.stdout.flush()
+            time.sleep(self.delay)
+            sys.stdout.write('\b')
+            sys.stdout.flush()
+
+    def __enter__(self):
+        self.busy = True
+        threading.Thread(target=self.spinner_task).start()
+
+    def __exit__(self, exception, value, tb):
+        self.busy = False
+        time.sleep(self.delay)
+        if exception is not None:
+            return False
 
 class event(object):
     #request_id
@@ -250,12 +223,12 @@ def handle_commands(commands):
 def fetch_commands():
     try:
         print(".")
-        url = BASE_URL+'/device/commands/{}'.format(device_id)
+        url = BASE_URL+'/device/commands/{}'.format(my_device_id)
 
-        # print(url)
+#        print(url)
         response = requests.get(url) 
         data = response.json()
-        # print(data)
+ #       print(data)
 
         if data['Items']:
             if len(data['Items']):
